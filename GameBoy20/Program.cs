@@ -1,4 +1,5 @@
 ﻿using GameBoy20.BlackJackGame;
+using GameBoy20.NumberGuessGame;
 using GameBoy20.Utils;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace GameBoy20
         {
             Console.WriteLine("Please select your game, 1,2,3");
             var selection = int.Parse(Console.ReadLine());
+            Console.WriteLine("Launching " + selection);
             GameSelection gameSelection = new GameSelection();
             IGame game = gameSelection.SelectGame(selection);
             game.LaunchGame();

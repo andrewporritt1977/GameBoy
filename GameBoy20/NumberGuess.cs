@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameBoy20
+namespace GameBoy20.NumberGuessGame
 {
 
 
@@ -28,8 +28,8 @@ namespace GameBoy20
         }
     }
     // Game Logic
-    class NumberGuess
+    class NumberGuess : IGame
     {
-
+        public void LaunchGame()
     }
 }

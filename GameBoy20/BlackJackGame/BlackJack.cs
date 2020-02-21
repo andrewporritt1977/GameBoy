@@ -1,58 +1,15 @@
-﻿using System;
+﻿using GameBoy20.Utils;
+using System;
 
-namespace GameBoy
+namespace GameBoy20.BlackJackGame
 {
     //Class Setup
-    public abstract class Participant
-    {
-        public int Hand { get; set; }
 
-        public bool Stand { get; set; }
 
-        public string TakeCard()
-        {
-            Hand = Hand + CardDeck.TakeCard();
-            if (Hand == 21)
-            {
-                return "Blackjack";
-            }
-            if (Hand > 21)
-            {
-                return "Bust";
-            }
-            return "Continue";
-        }
-    }
-
-    public class Player : Participant
-    {
-        public bool? Win { get; set; }
-    }
-
-    public class Dealer : Participant
-    {
-        public Dealer()
-        {
-            Random random = new Random();
-            HiddenCard = CardDeck.TakeCard();
-        }
-
-        public int HiddenCard { get; set; }
-    }
-
-    public static class CardDeck
-    {
-        public static int TakeCard()
-        {
-            Random random = new Random();
-            return random.Next(1, 11);
-        }
-
-    }
     // Game Logic
-    class BlackJack
+    class BlackJack : IGame
     {
-        static void Main(string[] args)
+        public void LaunchGame()
         {   
             //initial step
             Dealer dealer = new Dealer();

@@ -2,9 +2,9 @@
 using System.Linq;
 using GameBoy20.BlackJackGame;
 
-namespace GameBoy20
+namespace GameBoy20.NumberPokeGame
 {
-    class NumberPoke
+    class Setup
     {
         public int CardOne { get; set; }
         public int CardTwo { get; set; }

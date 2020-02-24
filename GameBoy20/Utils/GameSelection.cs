@@ -1,5 +1,6 @@
 ﻿using GameBoy20.BlackJackGame;
 using GameBoy20.NumberGuessGame;
+using GameBoy20.NumberPokeGame;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,10 +14,9 @@ namespace GameBoy20.Utils
             switch (gameNumber)
             {
                 case 1:
-
                     return new NumberGuess();
                 case 2:
-                    break;
+                    return new NumberPoke();
                 case 3:
                     return new BlackJack();
                 default:

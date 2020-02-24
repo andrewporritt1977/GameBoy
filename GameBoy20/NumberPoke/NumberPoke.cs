@@ -2,13 +2,13 @@
 using System.Linq;
 using GameBoy20.BlackJackGame;
 
-namespace GameBoy20
+namespace GameBoy20.NumberPoke
 {
     class NumberPoke
     {
-        public int CardOne { get; set; }
-        public int CardTwo { get; set; }
-        public int CardThree { get; set; }
+        public string CardOne { get; set; }
+        public string CardTwo { get; set; }
+        public string CardThree { get; set; }
         
         private bool CardOneHeld { get; set; }
         private bool CardTwoHeld { get; set; }
@@ -47,7 +47,7 @@ namespace GameBoy20
             {
                 return "Super-win";
             }
-            if (CardOne == CardTwo || CardTwo == CardThree)
+            if (CardOne == CardTwo || CardTwo == CardThree || CardOne == CardThree)
             {
                 return "Win";
             }

@@ -1,7 +1,7 @@
 using System;
 using GameBoy20.Utils;
 
-namespace GameBoy20
+namespace GameBoy20.NumberPoke
 {
     public class NumberPokeGame : IGame
     {

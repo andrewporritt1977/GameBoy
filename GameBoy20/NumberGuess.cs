@@ -8,7 +8,7 @@ namespace GameBoy20.NumberGuessGame
 
 
     //Game Setup
-    class NumberGuessSetup
+    class Setup
     {
         public int Target { get; set; }
 
@@ -27,13 +27,27 @@ namespace GameBoy20.NumberGuessGame
                 return "Lose";
             }
         }
+
+        public int NumberGuess()
+        {
+            Random rando = new Random();
+            return rando.Next(1, 10);
+        }
+
+
     }
     // Game Logic
     class NumberGuess : IGame
     {
         public void LaunchGame()
         {
-            Console.WriteLine("Success!!!!");
+            // Setup new game
+            Setup setup = new Setup();
+
+            setup.Target = setup.NumberGuess();
+
+            Console.WriteLine(setup.Target);
+            
         }
     }
 }

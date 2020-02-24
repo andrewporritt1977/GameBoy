@@ -13,10 +13,10 @@ namespace GameBoy20.Utils
             switch (gameNumber)
             {
                 case 1:
-                    //HighLow
-                    break;
-                case 2:
+
                     return new NumberGuess();
+                case 2:
+                    break;
                 case 3:
                     return new BlackJack();
                 default:

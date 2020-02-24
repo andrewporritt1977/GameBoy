@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using GameBoy20.Utils;
 
 namespace GameBoy20.NumberGuessGame
 {
@@ -31,5 +32,8 @@ namespace GameBoy20.NumberGuessGame
     class NumberGuess : IGame
     {
         public void LaunchGame()
+        {
+            Console.WriteLine("Success!!!!");
+        }
     }
 }

@@ -14,6 +14,10 @@ namespace GameBoy20
             Console.WriteLine("Which cards do you wish to hold? Please enter 1, 2, and 3 with comma separation.");
             var heldCards = Console.ReadLine();
             numberPoke.HoldCards(heldCards);
+            numberPoke.DrawCards();
+            Console.WriteLine("Your cards are: " + numberPoke.CardOne + " " + numberPoke.CardTwo + " " + 
+                              numberPoke.CardThree);
+            Console.WriteLine(numberPoke.WinStatus());
         }
     }
 }

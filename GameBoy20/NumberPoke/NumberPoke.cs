@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 using GameBoy20.BlackJackGame;
 
 namespace GameBoy20
@@ -11,9 +10,9 @@ namespace GameBoy20
         public int CardTwo { get; set; }
         public int CardThree { get; set; }
         
-        public bool CardOneHeld { get; set; }
-        public bool CardTwoHeld { get; set; }
-        public bool CardThreeHeld { get; set; }
+        private bool CardOneHeld { get; set; }
+        private bool CardTwoHeld { get; set; }
+        private bool CardThreeHeld { get; set; }
 
         public void DrawCards()
         {
@@ -22,9 +21,37 @@ namespace GameBoy20
             if (!CardThreeHeld) CardThree = CardDeck.TakeCard();
         }
 
-        public void HoldCards(string heldCards)
+        public void HoldCards(string heldCardsString)
         {
-            
+            List<int> heldCards = heldCardsString.Split(',').Select(int.Parse).ToList();
+            foreach (var card in heldCards)
+            {
+                switch (card) 
+                {
+                    case 1:
+                        CardOneHeld = true;
+                        break;
+                    case 2:
+                        CardTwoHeld = true;
+                        break;
+                    case 3:
+                        CardThreeHeld = true;
+                        break;
+                }
+            }
+        }
+
+        public string WinStatus()
+        {
+            if (CardOne == CardTwo && CardTwo == CardThree)
+            {
+                return "Super-win";
+            }
+            if (CardOne == CardTwo || CardTwo == CardThree)
+            {
+                return "Win";
+            }
+            return "Lose";
         }
     }
 }

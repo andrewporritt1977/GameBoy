@@ -15,12 +15,9 @@ namespace GameBoy20.Utils
                     //HighLow
                     break;
                 case 2:
-                    //NumberPoke
-                    break;
+                    return new NumberPokeGame();
                 case 3:
                     return new BlackJack();
-                default:
-                    break;
             }
             return null;
 

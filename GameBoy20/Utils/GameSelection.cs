@@ -4,6 +4,7 @@ using GameBoy20.NumberPokeGame;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using GameBoy20.NumberPoke;
 
 namespace GameBoy20.Utils
 {

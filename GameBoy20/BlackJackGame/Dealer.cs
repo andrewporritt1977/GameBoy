@@ -8,11 +8,15 @@ namespace GameBoy20.BlackJackGame
     {
         public Dealer()
         {
-            Random random = new Random();
             HiddenCard = CardDeck.TakeCard();
         }
 
-        public int HiddenCard { get; set; }
+        public string HiddenCard { get; }
+
+        public void RevealHiddenCard()
+        {
+            Hand.Add(HiddenCard);
+        }
     }
 
 }

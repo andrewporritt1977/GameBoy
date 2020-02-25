@@ -4,7 +4,7 @@ using System;
 namespace GameBoy20.BlackJackGame
 {
     //Class Setup
-
+    
 
     // Game Logic
     class BlackJack : IGame
@@ -17,14 +17,16 @@ namespace GameBoy20.BlackJackGame
             Player player = new Player();
             player.TakeCard();
             player.TakeCard();
+            
             //play
             Console.WriteLine("Welcome to blackjack");
-            Console.WriteLine("The dealer's cards, excluding hidden card, total " + dealer.HandTotal());
-            //dealer start
+            Console.WriteLine("The dealer's cards, excluding hidden card, total " + dealer.HandTotal() + 
+                              " with their hand of: " + dealer.HandContents());
+
             //player turn
             while (!player.Stand)
             {
-                Console.WriteLine("Your hand is " + player.HandTotal());
+                Console.WriteLine("Your hand is " + player.HandTotal() + " with your hand of: " + player.HandContents());
                 Console.WriteLine("Would you like to take a hand? (y/n)");
                 var confirmation = Console.ReadLine();
                 if (confirmation.Equals("y"))
@@ -40,7 +42,8 @@ namespace GameBoy20.BlackJackGame
                     {
                         player.Win = false;
                         player.Stand = true;
-                        Console.WriteLine("You lose, your hand is : " + player.HandTotal());
+                        Console.WriteLine("You lose, your hand is : " + player.HandTotal() + 
+                                          " with your hand of: " + player.HandContents());
                     }
                 }
                 else
@@ -48,26 +51,27 @@ namespace GameBoy20.BlackJackGame
                     player.Stand = true;
                 }
             }
+            
             //Dealers turn
             if (!player.Win.HasValue)
             {
                 dealer.RevealHiddenCard();
                 Console.WriteLine("The dealer's hidden card is: " + dealer.HiddenCard + ", making their total at: " +
-                                  dealer.HandTotal());
+                                  dealer.HandTotal() + " with their hand of: " + dealer.HandContents());
                 while (dealer.HandTotal() < 17)
                 {
                     dealer.TakeCard();
-                    Console.WriteLine("The dealer has taken another card to now total: " + dealer.HandTotal());
+                    Console.WriteLine("The dealer has taken another card to now total: " + dealer.HandTotal() + " with their hand of: " + dealer.HandContents());
                 }
                 if (dealer.HandTotal() > 21)
                 {
                     player.Win = true;
-                    Console.WriteLine("The dealer has gone bust, you win.");
+                    Console.WriteLine("The dealer has gone bust, you win." + " with their hand of: " + dealer.HandContents());
                 }
                 else if (dealer.HandTotal() == 21)
                 {
                     player.Win = false;
-                    Console.WriteLine("BlackJack for dealer, you lose.");
+                    Console.WriteLine("BlackJack for dealer, you lose" + " with their hand of: " + dealer.HandContents());
                 }
                 else if (dealer.HandTotal() > player.HandTotal())
                 {

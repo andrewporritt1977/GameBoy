@@ -18,10 +18,24 @@ namespace GameBoy20.BlackJackGame
             {
                 if (Card.All(char.IsDigit)) total = total + Int32.Parse(Card);
                 else total = total + (int)Enum.Parse(typeof(CardNumbers), Card);
-
+            }
+            //ace calculation
+            int aceCount = 0;
+            foreach (var card in Hand)
+            {
+                if (card == "Ace") aceCount++;
             }
 
+            for (var i = 0; i < aceCount; i++)
+            {
+                if ((total + 10) < 21) total = total + 10;
+            }
             return total;
+        }
+
+        public string HandContents()
+        {
+            return string.Join(", ", Hand.ToArray());
         }
         public string TakeCard()
         {

@@ -14,7 +14,7 @@ namespace GameBoy20.Utils
             switch (gameNumber)
             {
                 case 1:
-                    return new NumberGuess(new NumberGuessUI());
+                    return new NumberGuess(new NumberGuessUi());
                 case 2:
                     return new NumberPoke();
                 case 3:

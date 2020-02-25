@@ -8,23 +8,20 @@ namespace GameBoy20.NumberGuessGame
     // Game Logic
     public class NumberGuess : IGame
     {
-        private NumberGuessUI _ui;
+        private INumberGuessUi _ui;
 
-        public NumberGuess(NumberGuessUI ui)
+        public NumberGuess(INumberGuessUi ui)
         {
             _ui = ui;
         }
 
         public void LaunchGame()
         {
-
-
             // Setup new game
             RandomCard randomCard = new RandomCard();
 
-            Plays plays = new Plays();
-
-            while (!plays.Win && plays.PlaysLeft > 0)
+            const int playCount = 5;
+            for (int i = 0; i < playCount; i++)
             {
                 if(randomCard.PlayRound(_ui.ObtainGuess()))
                 {
@@ -32,23 +29,9 @@ namespace GameBoy20.NumberGuessGame
                     Console.ReadLine();
                     return;
                 }
-
-                plays.PlaysLeft--;
-                Console.WriteLine("plays left - " + plays.PlaysLeft);
             }
+            _ui.LoseMessage(randomCard.Target);
 
-            Console.WriteLine(NumberGuessConstants.Lose);
-            Console.WriteLine(NumberGuessConstants.ActualNumber + randomCard.Target);
-
-        }
-    }
-
-    public class NumberGuessUI {
-
-        public string ObtainGuess() {
-            Console.WriteLine(NumberGuessConstants.GuessNumber);
-            Console.WriteLine(NumberGuessConstants.NumberRange);
-            return Console.ReadLine();
         }
     }
 }

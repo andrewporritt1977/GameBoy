@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using GameBoy20.Utils;
 
 namespace GameBoy20.NumberGuessGame

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GameBoy20.BlackJackGame
+﻿namespace GameBoy20.BlackJackGame
 {
     public class Dealer : Participant
     {

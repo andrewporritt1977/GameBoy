@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GameBoy20.Utils
+﻿namespace GameBoy20.Utils
 {
     public class NumberGuessConstants
     {

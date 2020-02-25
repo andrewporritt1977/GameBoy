@@ -1,11 +1,11 @@
-﻿using System;
+﻿using GameBoy20.Cards;
+using System;
 
 namespace GameBoy20.BlackJackGame
 {
-    public static class CardDeck
+    public class CardDeck : ICardDeck
     {
-        
-        public static string TakeCard()
+        public string TakeCard()
         {
             var cards = new string[] {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", 
                 "Queen", "King"};
@@ -13,6 +13,5 @@ namespace GameBoy20.BlackJackGame
             var position = random.Next(0, 12);
             return cards.GetValue(position).ToString();
         }
-
     }
 }

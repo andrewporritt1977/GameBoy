@@ -1,12 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GameBoy20.BlackJackGame;
+using GameBoy20.Cards;
 
 namespace GameBoy20.NumberPokeGame
 
 {
     class Setup
     {
+        public Setup(ICardDeck cardDeck) 
+        {
+            _cardDeck = cardDeck;
+        }
+
+        private ICardDeck _cardDeck;
+
         public string CardOne { get; set; }
         public string CardTwo { get; set; }
         public string CardThree { get; set; }
@@ -17,9 +25,9 @@ namespace GameBoy20.NumberPokeGame
 
         public void DrawCards()
         {
-            if (!CardOneHeld) CardOne = CardDeck.TakeCard();
-            if (!CardTwoHeld) CardTwo = CardDeck.TakeCard();
-            if (!CardThreeHeld) CardThree = CardDeck.TakeCard();
+            if (!CardOneHeld) CardOne = _cardDeck.TakeCard();
+            if (!CardTwoHeld) CardTwo = _cardDeck.TakeCard();
+            if (!CardThreeHeld) CardThree = _cardDeck.TakeCard();
         }
 
         public void HoldCards(string heldCardsString)

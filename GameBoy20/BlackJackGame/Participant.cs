@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameBoy20.Cards;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,10 +7,17 @@ namespace GameBoy20.BlackJackGame
 {
     public abstract class Participant
     {
+        public Participant(ICardDeck cardDeck)
+        {
+            _cardDeck = cardDeck;
+        }
+
+        protected ICardDeck _cardDeck;
+
         public List<string> Hand = new List<string>();
 
         public bool Stand { get; set; }
-
+        
         public int HandTotal()
         {
             int total = 0;
@@ -38,7 +46,7 @@ namespace GameBoy20.BlackJackGame
         }
         public string TakeCard()
         {
-            var card = CardDeck.TakeCard();
+            var card = _cardDeck.TakeCard();
             Hand.Add(card);
             if (HandTotal() == 21)
             {

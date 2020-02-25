@@ -1,10 +1,12 @@
 ﻿using System;
+using GameBoy20.BlackJackGame;
+using GameBoy20.Cards;
 using GameBoy20.Utils;
 
 namespace GameBoy20.NumberGuessGame
 {
     // Game Logic
-    public class NumberGuess : IGame
+    public class NumberGuess
     {
         private INumberGuessUi _ui;
 
@@ -13,22 +15,19 @@ namespace GameBoy20.NumberGuessGame
             _ui = ui;
         }
 
-        public void LaunchGame()
+        public void PlayGame(string target)
         {
             // Setup new game
-            RandomCard randomCard = new RandomCard();
-
             const int playCount = 5;
             for (int i = 0; i < playCount; i++)
             {
-                if(randomCard.PlayRound(_ui.ObtainGuess()))
+                if (target == _ui.ObtainGuess())
                 {
-                    Console.WriteLine(NumberGuessConstants.Win);
-                    Console.ReadLine();
+                    _ui.ObtainWinConfirmation();
                     return;
                 }
             }
-            _ui.LoseMessage(randomCard.Target);
+            _ui.NotifyGameLoss(target);
 
         }
     }

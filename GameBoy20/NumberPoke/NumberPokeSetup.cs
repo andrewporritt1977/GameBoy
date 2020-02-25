@@ -1,23 +1,23 @@
 using System;
 using GameBoy20.Utils;
 
-namespace GameBoy20.NumberPoke
+namespace GameBoy20.NumberPokeGame
 {
-    public class NumberPokeGame : IGame
+    public class NumberPoke : IGame
     {
         public void LaunchGame()
         {
-            NumberPoke numberPoke = new NumberPoke();
-            numberPoke.DrawCards();
-            Console.WriteLine("Your cards are: " + numberPoke.CardOne + " " + numberPoke.CardTwo + " " + 
-                              numberPoke.CardThree);
+            Setup setup = new Setup();
+            setup.DrawCards();
+            Console.WriteLine("Your cards are: " + setup.CardOne + " " + setup.CardTwo + " " + 
+                              setup.CardThree);
             Console.WriteLine("Which cards do you wish to hold? Please enter 1, 2, and 3 with comma separation.");
             var heldCards = Console.ReadLine();
-            numberPoke.HoldCards(heldCards);
-            numberPoke.DrawCards();
-            Console.WriteLine("Your cards are: " + numberPoke.CardOne + " " + numberPoke.CardTwo + " " + 
-                              numberPoke.CardThree);
-            Console.WriteLine(numberPoke.WinStatus());
+            setup.HoldCards(heldCards);
+            setup.DrawCards();
+            Console.WriteLine("Your cards are: " + setup.CardOne + " " + setup.CardTwo + " " + 
+                              setup.CardThree);
+            Console.WriteLine(setup.WinStatus());
         }
     }
 }

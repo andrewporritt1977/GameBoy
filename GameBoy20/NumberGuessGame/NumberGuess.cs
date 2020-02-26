@@ -9,16 +9,19 @@ namespace GameBoy20.NumberGuessGame
     public class NumberGuess
     {
         private readonly INumberGuessUi _ui;
+        private readonly ICardDeck _cardDeck;
 
-        public NumberGuess(INumberGuessUi ui)
+        public NumberGuess(INumberGuessUi ui, ICardDeck cardDeck)
         {
             _ui = ui;
+            _cardDeck = cardDeck;
         }
 
-        public void PlayGame(string target)
+        public void PlayGame()
         {
             // Setup new game
             const int playCount = 5;
+            var target = _cardDeck.TakeCard();
             for (var i = 0; i < playCount; i++)
             {
                 if(target == _ui.ObtainGuess())

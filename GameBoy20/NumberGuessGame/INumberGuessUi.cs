@@ -6,6 +6,8 @@ namespace GameBoy20.NumberGuessGame
 
         public void ObtainWinConfirmation();
 
+        public void NotifyIncorrectGuess();
+
         public void NotifyGameLoss(string targetCard);
     }
 }

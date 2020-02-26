@@ -21,5 +21,10 @@ namespace GameBoy20.NumberGuessGame
             Console.WriteLine(NumberGuessConstants.Win);
             Console.ReadLine();
         }
+
+        public void NotifyIncorrectGuess()
+        {
+            Console.WriteLine(NumberGuessConstants.No);
+        }
     }
 }

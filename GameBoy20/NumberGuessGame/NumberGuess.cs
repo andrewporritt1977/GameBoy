@@ -26,6 +26,7 @@ namespace GameBoy20.NumberGuessGame
                     _ui.ObtainWinConfirmation();
                     return;
                 }
+                _ui.NotifyIncorrectGuess();
             }
             _ui.NotifyGameLoss(target);
 

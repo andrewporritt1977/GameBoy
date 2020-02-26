@@ -1,7 +1,7 @@
 ﻿using GameBoy20.Cards;
 using System;
 
-namespace GameBoy20.BlackJackGame
+namespace GameBoy20.Cards
 {
     public class CardDeck : ICardDeck
     {

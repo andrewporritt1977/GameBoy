@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GameBoy20.BlackJackGame;
 using GameBoy20.Cards;
 
-namespace GameBoy20.NumberPoke
-
+namespace GameBoy20.NumberPokeGame
 {
-    class NumberPokeGame
+    class NumberPokeLogic
     {
-        public NumberPokeGame(ICardDeck cardDeck) 
+        public NumberPokeLogic(ICardDeck cardDeck) 
         {
             _cardDeck = cardDeck;
         }

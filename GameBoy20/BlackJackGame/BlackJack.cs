@@ -1,4 +1,5 @@
-﻿using GameBoy20.Utils;
+﻿using GameBoy20.Cards;
+using GameBoy20.Utils;
 using System;
 
 namespace GameBoy20.BlackJackGame

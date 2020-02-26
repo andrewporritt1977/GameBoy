@@ -1,5 +1,4 @@
 using System;
-using GameBoy20.Utils;
 
 namespace GameBoy20.NumberGuessGame
 {

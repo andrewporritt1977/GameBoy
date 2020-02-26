@@ -7,5 +7,7 @@ namespace GameBoy20.Cards
     public interface ICardDeck
     {
         public string TakeCard();
+
+        public List<string> TakeHand(int numberOfCards);
     }
 }

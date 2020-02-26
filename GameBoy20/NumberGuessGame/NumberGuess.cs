@@ -1,7 +1,4 @@
-﻿using System;
-using GameBoy20.BlackJackGame;
-using GameBoy20.Cards;
-using GameBoy20.Utils;
+﻿using GameBoy20.Cards;
 
 namespace GameBoy20.NumberGuessGame
 {
@@ -32,7 +29,6 @@ namespace GameBoy20.NumberGuessGame
                 _ui.NotifyIncorrectGuess();
             }
             _ui.NotifyGameLoss(target);
-
         }
     }
 }

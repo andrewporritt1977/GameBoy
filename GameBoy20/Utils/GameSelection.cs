@@ -21,7 +21,6 @@ namespace GameBoy20.Utils
                     break;
             }
             return null;
-
         }
     }
 }

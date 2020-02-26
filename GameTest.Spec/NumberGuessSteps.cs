@@ -16,6 +16,7 @@ namespace GameTest.Spec
         public NumberGuessSteps()
         {
             _mockUi = new Mock<INumberGuessUi>();
+            _mockCardDeck = new Mock<ICardDeck>();
             _numberGuess = new PlayNumberGuess(_mockCardDeck.Object,
                 new NumberGuess(_mockUi.Object));
         }

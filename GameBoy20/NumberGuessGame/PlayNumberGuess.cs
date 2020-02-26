@@ -8,8 +8,8 @@ namespace GameBoy20.NumberGuessGame
 {
     public class PlayNumberGuess : IGame
     {
-        private ICardDeck _cardDeck;
-        private NumberGuess _numberGuess;
+        private readonly ICardDeck _cardDeck;
+        private readonly NumberGuess _numberGuess;
 
         public PlayNumberGuess(ICardDeck cardDeck, NumberGuess numberGuess)
         {

@@ -8,7 +8,7 @@ namespace GameBoy20.NumberGuessGame
     // Game Logic
     public class NumberGuess
     {
-        private INumberGuessUi _ui;
+        private readonly INumberGuessUi _ui;
 
         public NumberGuess(INumberGuessUi ui)
         {
@@ -19,9 +19,9 @@ namespace GameBoy20.NumberGuessGame
         {
             // Setup new game
             const int playCount = 5;
-            for (int i = 0; i < playCount; i++)
+            for (var i = 0; i < playCount; i++)
             {
-                if (target == _ui.ObtainGuess())
+                if(target == _ui.ObtainGuess())
                 {
                     _ui.ObtainWinConfirmation();
                     return;

@@ -1,66 +1,24 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+using System;
 using GameBoy20.BlackJackGame;
-using GameBoy20.Cards;
+using GameBoy20.Utils;
 
-namespace GameBoy20.NumberPokeGame
-
+namespace GameBoy20.NumberPoke
 {
-    class Setup
+    public class NumberPoke : IGame
     {
-        public Setup(ICardDeck cardDeck) 
+        public void LaunchGame()
         {
-            _cardDeck = cardDeck;
-        }
-
-        private ICardDeck _cardDeck;
-
-        public string CardOne { get; set; }
-        public string CardTwo { get; set; }
-        public string CardThree { get; set; }
-        
-        private bool CardOneHeld { get; set; }
-        private bool CardTwoHeld { get; set; }
-        private bool CardThreeHeld { get; set; }
-
-        public void DrawCards()
-        {
-            if (!CardOneHeld) CardOne = _cardDeck.TakeCard();
-            if (!CardTwoHeld) CardTwo = _cardDeck.TakeCard();
-            if (!CardThreeHeld) CardThree = _cardDeck.TakeCard();
-        }
-
-        public void HoldCards(string heldCardsString)
-        {
-            List<int> heldCards = heldCardsString.Split(',').Select(int.Parse).ToList();
-            foreach (var card in heldCards)
-            {
-                switch (card) 
-                {
-                    case 1:
-                        CardOneHeld = true;
-                        break;
-                    case 2:
-                        CardTwoHeld = true;
-                        break;
-                    case 3:
-                        CardThreeHeld = true;
-                        break;
-                }
-            }
-        }
-
-        public string WinStatus()
-        {
-            if (CardOne == CardTwo && CardTwo == CardThree)
-            {
-                return "Super-win";
-            }
-            if (CardOne == CardTwo || CardTwo == CardThree || CardOne == CardThree)
-            {
-                return "Win";
-            }
-            return "Lose";
+            NumberPokeGame numberPokeGame = new NumberPokeGame(new CardDeck());
+            numberPokeGame.DrawCards();
+            Console.WriteLine("Your cards are: " + numberPokeGame.CardOne + " " + numberPokeGame.CardTwo + " " + 
+                              numberPokeGame.CardThree);
+            Console.WriteLine("Which cards do you wish to hold? Please enter 1, 2, and 3 with comma separation.");
+            var heldCards = Console.ReadLine();
+            numberPokeGame.HoldCards(heldCards);
+            numberPokeGame.DrawCards();
+            Console.WriteLine("Your cards are: " + numberPokeGame.CardOne + " " + numberPokeGame.CardTwo + " " + 
+                              numberPokeGame.CardThree);
+            Console.WriteLine(numberPokeGame.WinStatus());
         }
     }
 }

@@ -12,9 +12,9 @@ namespace GameBoy20.BlackJackGame
         public void LaunchGame()
         {   
             //initial step
-            Dealer dealer = new Dealer();
+            Dealer dealer = new Dealer(new CardDeck());
             dealer.TakeCard();
-            Player player = new Player();
+            Player player = new Player(new CardDeck());
             player.TakeCard();
             player.TakeCard();
             

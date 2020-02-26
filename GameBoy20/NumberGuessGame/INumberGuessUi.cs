@@ -4,6 +4,10 @@ namespace GameBoy20.NumberGuessGame
     {
         public string ObtainGuess();
 
-        public void LoseMessage(string targetCard);
+        public void ObtainWinConfirmation();
+
+        public void NotifyIncorrectGuess();
+
+        public void NotifyGameLoss(string targetCard);
     }
 }

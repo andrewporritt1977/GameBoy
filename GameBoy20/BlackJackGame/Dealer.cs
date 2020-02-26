@@ -1,11 +1,14 @@
-﻿namespace GameBoy20.BlackJackGame
+﻿using GameBoy20.Cards;
+
+namespace GameBoy20.BlackJackGame
 {
     public class Dealer : Participant
     {
-        public Dealer()
+        public Dealer(ICardDeck cardDeck) : base(cardDeck)
         {
-            HiddenCard = CardDeck.TakeCard();
+           HiddenCard = _cardDeck.TakeCard();
         }
+
 
         public string HiddenCard { get; }
 

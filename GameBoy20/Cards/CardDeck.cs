@@ -16,12 +16,12 @@ namespace GameBoy20.Cards
             return cards.GetValue(position).ToString();
         }
 
-        public List<string> TakeHand(int numberOfCards)
+        public string[] TakeHand(int numberOfCards)
         {
-            List<string> cards = new List<string>();
+            string[] cards = new string[numberOfCards];
             for (var i=0; i<numberOfCards; i++)
             {
-                cards.Add(TakeCard());
+                cards[i] = (TakeCard());
             }
             return cards;
         }

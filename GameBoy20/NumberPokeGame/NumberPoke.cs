@@ -1,5 +1,7 @@
 using GameBoy20.Cards;
 using GameBoy20.Utils;
+using System;
+using System.Linq;
 
 namespace GameBoy20.NumberPokeGame
 {
@@ -14,36 +16,47 @@ namespace GameBoy20.NumberPokeGame
             _cardDeck = cardDeck;
         }
 
+        private void InformCards(string[] cards)
+        {
+            foreach (var card in cards)
+            {
+                Console.WriteLine(card.ToString());
+            }
+        }
+
         public void LaunchGame()
         {
             //grabs 3 cards
             var cards = _cardDeck.TakeHand(3);
-
-            //asks which to hold
-            var heldCards = _ui.ObtainCardsToHold();
-
-            //refreshes non held cards
-            //needs to be able to tell which cards are not held
-            //then needs to be able to refresh all not held cards
-
-            //tell whether the user has lost, won, or super-won
-                //done by checking the new refreshed cards (including the held cards)
-
-            //list of ints of which cards are held
-            //e.g. the cards held 2 and 3, heldList == 2,3 is true
-            List<int> heldList = heldCards.Split(',').Select(int.Parse).ToList();
+            InformCards(cards);
 
 
+            //collects which cards the user wants to not redraw
+            int[] held = _ui.ObtainCardsToHold().Split(',').Select(int.Parse).ToArray();
+            _ui.InformNewLine();
 
-            // NumberPokeLogic numberPokeGame = new NumberPokeLogic(new CardDeck());
-            // numberPokeGame.DrawCards();
-            //
-            // _ui.InformYourCards(numberPokeGame.CardOne, numberPokeGame.CardTwo, numberPokeGame.CardThree);
-            // var heldCards = _ui.ObtainCardsToHold();
-            // numberPokeGame.HoldCards(heldCards);
-            // numberPokeGame.DrawCards();
-            // _ui.InformYourCards(numberPokeGame.CardOne, numberPokeGame.CardTwo, numberPokeGame.CardThree);
-            // _ui.InformWinStatus(numberPokeGame.WinStatus());
+            //redraws non held cards
+            for (int i = 0; i < cards.Length; i++)
+            {
+                if (!held.Contains(i + 1))
+                {
+                    cards[i] = _cardDeck.TakeCard();
+                }
+            }
+
+            InformCards(cards);
+
+            if (cards[0] == cards[1] && cards[1] == cards[2])
+            {
+                _ui.InformSuperWin();
+            }
+            else if (cards[0] == cards[1] || cards[1] == cards[2] || cards[0] == cards[2])
+            {
+                _ui.InformWin();
+            } else
+            {
+                _ui.InformLose();
+            }
         }
     }
 }

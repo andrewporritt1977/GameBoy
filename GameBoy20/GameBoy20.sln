@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameBoy20", "GameBoy20.csproj", "{A07081ED-C6CA-4185-8AEF-19BA165EC748}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameTest.Spec", "..\GameTest.Spec\GameTest.Spec.csproj", "{897ED5C3-D8CE-4F91-BC34-ADDE8750930E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameTest.NumberGuess.Spec", "..\GameTest.Spec\GameTest.NumberGuess.Spec.csproj", "{897ED5C3-D8CE-4F91-BC34-ADDE8750930E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameTest.NumberPoke.Spec", "..\GameTest.NumberPoke.Spec\GameTest.NumberPoke.Spec.csproj", "{1720731D-8D44-44B2-8D75-5A92FA8E375D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{897ED5C3-D8CE-4F91-BC34-ADDE8750930E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{897ED5C3-D8CE-4F91-BC34-ADDE8750930E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{897ED5C3-D8CE-4F91-BC34-ADDE8750930E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1720731D-8D44-44B2-8D75-5A92FA8E375D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1720731D-8D44-44B2-8D75-5A92FA8E375D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1720731D-8D44-44B2-8D75-5A92FA8E375D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1720731D-8D44-44B2-8D75-5A92FA8E375D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

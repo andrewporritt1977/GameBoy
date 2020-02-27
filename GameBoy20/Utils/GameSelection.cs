@@ -14,7 +14,7 @@ namespace GameBoy20.Utils
                 case 1:
                     return new PlayNumberGuess(new NumberGuess(new NumberGuessUi(), new CardDeck()));
                 case 2:
-                    return new NumberPoke(new NumberPokeUi());
+                    return new NumberPoke(new NumberPokeUi(), new CardDeck());
                 case 3:
                     return new BlackJack();
                 default:

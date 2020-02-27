@@ -3,6 +3,7 @@ using GameBoy20.NumberGuessGame;
 using Moq;
 using System;
 using TechTalk.SpecFlow;
+using GBNumberGuessGame = GameBoy20.NumberGuessGame;
 
 namespace GameTest.Spec
 {
@@ -17,7 +18,7 @@ namespace GameTest.Spec
         {
             _mockUi = new Mock<INumberGuessUi>();
             _mockCardDeck = new Mock<ICardDeck>();
-            _numberGuess = new PlayNumberGuess(new NumberGuess(_mockUi.Object, _mockCardDeck.Object));
+            _numberGuess = new PlayNumberGuess(new GBNumberGuessGame.NumberGuess(_mockUi.Object, _mockCardDeck.Object));
         }
 
         [Given(@"I have a target card ""(.*)""")]

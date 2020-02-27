@@ -4,6 +4,26 @@ namespace GameBoy20.NumberPokeGame
 {
     class NumberPokeUi : INumberPokeUi
     {
+        public void InformLose()
+        {
+            Console.WriteLine("You have lost rip");
+        }
+
+        public void InformNewLine()
+        {
+            Console.WriteLine("");
+        }
+
+        public void InformSuperWin()
+        {
+            Console.WriteLine("You have super won");
+        }
+
+        public void InformWin()
+        {
+            Console.WriteLine("You've done a boring win thing");
+        }
+
         public void InformWinStatus(string winStatus)
         {
             Console.WriteLine(winStatus);
@@ -12,6 +32,11 @@ namespace GameBoy20.NumberPokeGame
         public void InformYourCards(string cardOne, string cardTwo, string cardThree)
         {
             Console.WriteLine("Your cards are: " + cardOne + " " + cardTwo + " " + cardThree);
+        }
+
+        public void InformYourCards(string[] cards)
+        {
+            throw new NotImplementedException();
         }
 
         public string ObtainCardsToHold()

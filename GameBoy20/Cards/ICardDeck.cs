@@ -8,6 +8,6 @@ namespace GameBoy20.Cards
     {
         public string TakeCard();
 
-        public List<string> TakeHand(int numberOfCards);
+        public string[] TakeHand(int numberOfCards);
     }
 }

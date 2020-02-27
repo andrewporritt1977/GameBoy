@@ -26,3 +26,9 @@ Scenario: Lose Game After 5 Incorrect Guesses
 	And I guess multiple "3", then "5", then "Queen", then "Ace" then "6"
 	When I launch the game
 	Then the result will be Lose
+	@game_result_highLow
+Scenario: Lose Game After 5 Incompatible Guesses
+	Given I have a target card "4"
+	And I guess multiple "", then "£", then "Kween", then "57" then "$"
+	When I launch the game
+	Then the result will be Lose

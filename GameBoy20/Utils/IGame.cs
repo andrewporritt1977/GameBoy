@@ -1,6 +1,6 @@
 ﻿namespace GameBoy20.Utils
 {
-    interface IGame
+    public interface IGame
     {
         public void LaunchGame(){}
     }

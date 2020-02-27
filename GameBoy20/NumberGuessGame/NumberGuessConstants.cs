@@ -1,4 +1,4 @@
-﻿namespace GameBoy20.Utils
+﻿namespace GameBoy20.NumberGuessGame
 {
     public class NumberGuessConstants
     {

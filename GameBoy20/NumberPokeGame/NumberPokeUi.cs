@@ -34,9 +34,13 @@ namespace GameBoy20.NumberPokeGame
             Console.WriteLine("Your cards are: " + cardOne + " " + cardTwo + " " + cardThree);
         }
 
-        public void InformYourCards(string[] cards)
+        public void InformCards(string[] cards)
         {
-            throw new NotImplementedException();
+            foreach (var card in cards)
+            {
+                Console.Write(card.ToString() + ", ");
+            }
+            Console.WriteLine("");
         }
 
         public string ObtainCardsToHold()

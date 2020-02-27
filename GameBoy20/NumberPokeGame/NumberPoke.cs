@@ -16,19 +16,11 @@ namespace GameBoy20.NumberPokeGame
             _cardDeck = cardDeck;
         }
 
-        private void InformCards(string[] cards)
-        {
-            foreach (var card in cards)
-            {
-                Console.WriteLine(card.ToString());
-            }
-        }
-
         public void LaunchGame()
         {
             //grabs 3 cards
             var cards = _cardDeck.TakeHand(3);
-            InformCards(cards);
+            _ui.InformCards(cards);
 
 
             //collects which cards the user wants to not redraw
@@ -44,7 +36,7 @@ namespace GameBoy20.NumberPokeGame
                 }
             }
 
-            InformCards(cards);
+            _ui.InformCards(cards);
 
             if (cards[0] == cards[1] && cards[1] == cards[2])
             {

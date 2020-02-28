@@ -11,7 +11,7 @@ namespace GameBoy20.NumberPokeGame
         public void InformWin();
         public void InformSuperWin();
         public void InformNewLine();
-        public void InformCards(string[] cards);
+        public void InformCards(Hand hand);
 
     }
 }

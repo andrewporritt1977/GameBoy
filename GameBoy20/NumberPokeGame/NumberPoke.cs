@@ -18,36 +18,39 @@ namespace GameBoy20.NumberPokeGame
 
         public void LaunchGame()
         {
+            Hand hand = new Hand();
+            
             //grabs 3 cards
-            var cards = _cardDeck.TakeHand(3);
-            _ui.InformCards(cards);
+            hand.CardOne = _cardDeck.TakeCard();
+            hand.CardTwo = _cardDeck.TakeCard();
+            hand.CardThree = _cardDeck.TakeCard();
+            
+            
+            _ui.InformCards(hand);
 
 
             //collects which cards the user wants to not redraw
-            int[] held = _ui.ObtainCardsToHold().Split(',').Select(int.Parse).ToArray();
+            string heldCards = _ui.ObtainCardsToHold();
+            int[] held = heldCards.Split(',').Select(int.Parse).ToArray();
             _ui.InformNewLine();
 
             //redraws non held cards
-            for (int i = 0; i < cards.Length; i++)
-            {
-                if (!held.Contains(i + 1))
-                {
-                    cards[i] = _cardDeck.TakeCard();
-                }
-            }
+            if (!held.Contains(1)) hand.CardOne = _cardDeck.TakeCard();
+            if (!held.Contains(2)) hand.CardTwo = _cardDeck.TakeCard();
+            if (!held.Contains(3)) hand.CardThree = _cardDeck.TakeCard();
 
-            _ui.InformCards(cards);
-
-            if (cards[0] == cards[1] && cards[1] == cards[2])
+            _ui.InformCards(hand);
+            switch (hand.GetWinStatus())
             {
-                _ui.InformSuperWin();
-            }
-            else if (cards[0] == cards[1] || cards[1] == cards[2] || cards[0] == cards[2])
-            {
-                _ui.InformWin();
-            } else
-            {
-                _ui.InformLose();
+                case ((int)GameResultEnum.SuperWin):
+                    _ui.InformSuperWin();
+                    break;
+                case ((int)GameResultEnum.Win):
+                    _ui.InformWin();
+                    break;
+                case ((int)GameResultEnum.Lose):
+                    _ui.InformLose();
+                    break;
             }
         }
     }

@@ -14,6 +14,11 @@ namespace GameBoy20.NumberPokeGame
             Console.WriteLine("");
         }
 
+        public void InformCards(Hand hand)
+        {
+            Console.WriteLine("Your cards are: " + hand.CardOne + " " + hand.CardTwo + " " + hand.CardThree);
+        }
+
         public void InformSuperWin()
         {
             Console.WriteLine("You have super won");
@@ -27,20 +32,6 @@ namespace GameBoy20.NumberPokeGame
         public void InformWinStatus(string winStatus)
         {
             Console.WriteLine(winStatus);
-        }
-
-        public void InformYourCards(string cardOne, string cardTwo, string cardThree)
-        {
-            Console.WriteLine("Your cards are: " + cardOne + " " + cardTwo + " " + cardThree);
-        }
-
-        public void InformCards(string[] cards)
-        {
-            foreach (var card in cards)
-            {
-                Console.Write(card.ToString() + ", ");
-            }
-            Console.WriteLine("");
         }
 
         public string ObtainCardsToHold()

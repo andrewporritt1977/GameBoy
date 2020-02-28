@@ -24,8 +24,10 @@ namespace GameTest.NumberPokeGame.Spec
         [Given(@"the top cards are ""(.*)"", ""(.*)"", ""(.*)"", ""(.*)"", ""(.*)"", ""(.*)""")]
         public void GivenTheTopCardsAre(string p0, string p1, string p2, string p3, string p4, string p5)
         {
-            _mockCardDeck.Setup(u => u.TakeHand(3)).Returns(new string[] { p0, p1, p2 });
             _mockCardDeck.SetupSequence(u => u.TakeCard())
+                .Returns(p0)
+                .Returns(p1)
+                .Returns(p2)
                 .Returns(p3)
                 .Returns(p4)
                 .Returns(p5)

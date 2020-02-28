@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GameBoy20.NumberPokeGame
+﻿namespace GameBoy20.NumberPokeGame.Messages.Interfaces
 {
-    public interface INumberPokeUi
+    public interface INumberPokeMessages
     {
         public string ObtainCardsToHold();
         public void InformLose();

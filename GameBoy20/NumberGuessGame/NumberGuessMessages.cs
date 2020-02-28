@@ -2,7 +2,7 @@ using System;
 
 namespace GameBoy20.NumberGuessGame
 {
-    internal class NumberGuessUi : INumberGuessUi {
+    internal class NumberGuessMessages : INumberGuessMessages {
         public string ObtainGuess() {
             Console.WriteLine(NumberGuessConstants.GuessNumber);
             Console.WriteLine(NumberGuessConstants.NumberRange);

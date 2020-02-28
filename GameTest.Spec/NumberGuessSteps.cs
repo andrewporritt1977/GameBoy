@@ -1,24 +1,24 @@
-﻿using GameBoy20.Cards;
+﻿using System;
 using GameBoy20.NumberGuessGame;
+using GameBoy20.Cards;
 using Moq;
-using System;
 using TechTalk.SpecFlow;
 using GBNumberGuessGame = GameBoy20.NumberGuessGame;
 
-namespace GameTest.Spec
+namespace GameTest.NumberGuess.Spec
 {
     [Binding]
     public class NumberGuessSteps
     {
-        private readonly Mock<INumberGuessUi> _mockUi;
-        private Mock<ICardDeck> _mockCardDeck;
+        private readonly Mock<INumberGuessMessages> _mockUi;
+        private readonly Mock<ICardDeck> _mockCardDeck;
         private readonly PlayNumberGuess _numberGuess;
 
         public NumberGuessSteps()
         {
-            _mockUi = new Mock<INumberGuessUi>();
+            _mockUi = new Mock<INumberGuessMessages>();
             _mockCardDeck = new Mock<ICardDeck>();
-            _numberGuess = new PlayNumberGuess(new GBNumberGuessGame.NumberGuess(_mockUi.Object, _mockCardDeck.Object));
+            _numberGuess = new PlayNumberGuess(new GBNumberGuessGame.NumberGuess(_mockUi.Object), _mockCardDeck.Object);
         }
 
         [Given(@"I have a target card ""(.*)""")]

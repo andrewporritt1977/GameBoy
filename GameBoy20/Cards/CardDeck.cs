@@ -18,12 +18,12 @@ namespace GameBoy20.Cards
 
         public string[] TakeHand(int numberOfCards)
         {
-            string[] cards = new string[numberOfCards];
-            for (var i=0; i<numberOfCards; i++)
+            var cards = new List<string>();
+            for (int i=0; i<numberOfCards; i++)
             {
-                cards[i] = (TakeCard());
-            }
-            return cards;
+                cards.Add(TakeCard());
+            };
+            return cards.ToArray(); //change to list 
         }
     }
 }

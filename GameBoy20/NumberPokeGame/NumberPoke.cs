@@ -1,57 +1,59 @@
 using GameBoy20.Cards;
-using GameBoy20.Utils;
-using System;
 using System.Linq;
+using GameBoy20.NumberPokeGame.Enums;
+using GameBoy20.NumberPokeGame.Messages.Interfaces;
+using GameBoy20.Utils.Interfaces;
 
 namespace GameBoy20.NumberPokeGame
 {
-    public class NumberPoke : IGame
+    public class NumberPoke
     {
-        private readonly INumberPokeUi _ui;
+        private readonly INumberPokeMessages _messages;
         private readonly ICardDeck _cardDeck;
 
-        public NumberPoke(INumberPokeUi ui, ICardDeck cardDeck)
+        public NumberPoke(INumberPokeMessages messages, ICardDeck cardDeck)
         {
-            _ui = ui;
+            _messages = messages;
             _cardDeck = cardDeck;
         }
 
-        public void LaunchGame()
+        private Hand RedrawCards(Hand hand)
         {
-            Hand hand = new Hand();
-            
-            //grabs 3 cards
-            hand.CardOne = _cardDeck.TakeCard();
-            hand.CardTwo = _cardDeck.TakeCard();
-            hand.CardThree = _cardDeck.TakeCard();
-            
-            
-            _ui.InformCards(hand);
-
-
             //collects which cards the user wants to not redraw
-            string heldCards = _ui.ObtainCardsToHold();
+            string heldCards = _messages.ObtainCardsToHold();
             int[] held = heldCards.Split(',').Select(int.Parse).ToArray();
-            _ui.InformNewLine();
+            _messages.InformNewLine();
 
             //redraws non held cards
             if (!held.Contains(1)) hand.CardOne = _cardDeck.TakeCard();
             if (!held.Contains(2)) hand.CardTwo = _cardDeck.TakeCard();
             if (!held.Contains(3)) hand.CardThree = _cardDeck.TakeCard();
+            return hand;
+        }
 
-            _ui.InformCards(hand);
+        private void WinStatus(Hand hand)
+        {
+            _messages.InformCards(hand);
             switch (hand.GetWinStatus())
             {
-                case ((int)GameResultEnum.SuperWin):
-                    _ui.InformSuperWin();
+                case (GameResultEnum.SuperWin):
+                    _messages.InformSuperWin();
                     break;
-                case ((int)GameResultEnum.Win):
-                    _ui.InformWin();
+                case (GameResultEnum.Win):
+                    _messages.InformWin();
                     break;
-                case ((int)GameResultEnum.Lose):
-                    _ui.InformLose();
+                case (GameResultEnum.Lose):
+                    _messages.InformLose();
                     break;
             }
+        }
+
+        public void PlayGame(Hand hand)
+        {  
+            // Hand hand = new Hand(_cardDeck.TakeHand(3));
+            _messages.InformCards(hand);
+            hand = RedrawCards(hand);
+            WinStatus(hand);
         }
     }
 }

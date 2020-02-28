@@ -1,4 +1,4 @@
-namespace GameBoy20.NumberPokeGame
+namespace GameBoy20.NumberPokeGame.Enums
 {
     public enum GameResultEnum
     {

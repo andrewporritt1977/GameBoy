@@ -1,24 +1,27 @@
-﻿using Moq;
-using System;
-using TechTalk.SpecFlow;
+﻿using System;
 using GameBoy20.Cards;
+using GameBoy20.NumberPokeGame.Messages.Interfaces;
+using GameBoy20.Utils.Interfaces;
+using Moq;
+using TechTalk.SpecFlow;
 using GBNumberPokeGame = GameBoy20.NumberPokeGame;
-using GameBoy20.Utils;
 
-namespace GameTest.NumberPokeGame.Spec
+namespace GameTest.NumberPoke.Spec
 {
     [Binding]
     public class NumberPokeSteps
     {
-        private readonly Mock<GBNumberPokeGame.INumberPokeUi> _mockUi;
+        private readonly Mock<INumberPokeMessages> _mockUi;
         private readonly Mock<ICardDeck> _mockCardDeck;
-        private readonly IGame  _numberPoke;
+        private readonly GBNumberPokeGame.NumberPoke _numberPoke;
+        private readonly IGame  _playNumberPoke;
 
         public NumberPokeSteps()
         {
-            _mockUi = new Mock<GBNumberPokeGame.INumberPokeUi>();
+            _mockUi = new Mock<INumberPokeMessages>();
             _mockCardDeck = new Mock<ICardDeck>();
             _numberPoke = new GBNumberPokeGame.NumberPoke(_mockUi.Object, _mockCardDeck.Object);
+            _playNumberPoke = new GBNumberPokeGame.PlayNumberPoke(_numberPoke, _mockCardDeck.Object);
         }
 
         [Given(@"the top cards are ""(.*)"", ""(.*)"", ""(.*)"", ""(.*)"", ""(.*)"", ""(.*)""")]
@@ -37,7 +40,7 @@ namespace GameTest.NumberPokeGame.Spec
         [When(@"I launch the game")]
         public void WhenILaunchTheGame()
         {
-            _numberPoke.LaunchGame();
+            _playNumberPoke.LaunchGame();
         }
         
         [Given(@"I hold cards ""(.*)""")]

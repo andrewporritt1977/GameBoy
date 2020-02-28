@@ -1,5 +1,6 @@
 ﻿using GameBoy20.Utils;
 using System;
+using GameBoy20.Utils.Interfaces;
 
 namespace GameBoy20
 {

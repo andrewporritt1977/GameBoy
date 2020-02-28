@@ -1,12 +1,14 @@
 ﻿using System;
+using GameBoy20.NumberPokeGame.Constants;
+using GameBoy20.NumberPokeGame.Messages.Interfaces;
 
-namespace GameBoy20.NumberPokeGame
+namespace GameBoy20.NumberPokeGame.Messages
 {
-    class NumberPokeUi : INumberPokeUi
+    internal class NumberPokeMessages : INumberPokeMessages
     {
         public void InformLose()
         {
-            Console.WriteLine("You have lost rip");
+            Console.WriteLine(NumberPokeUiConstants.LOSE);
         }
 
         public void InformNewLine()
@@ -16,17 +18,17 @@ namespace GameBoy20.NumberPokeGame
 
         public void InformCards(Hand hand)
         {
-            Console.WriteLine("Your cards are: " + hand.CardOne + " " + hand.CardTwo + " " + hand.CardThree);
+            Console.WriteLine($"{NumberPokeUiConstants.YOUR_CARDS} {hand.CardOne} {hand.CardTwo} {hand.CardThree}");
         }
 
         public void InformSuperWin()
         {
-            Console.WriteLine("You have super won");
+            Console.WriteLine(NumberPokeUiConstants.SUPER_WIN);
         }
 
         public void InformWin()
         {
-            Console.WriteLine("You've done a boring win thing");
+            Console.WriteLine(NumberPokeUiConstants.WIN);
         }
 
         public void InformWinStatus(string winStatus)
@@ -36,7 +38,7 @@ namespace GameBoy20.NumberPokeGame
 
         public string ObtainCardsToHold()
         {
-            Console.WriteLine("Which cards do you wish to hold? Please enter 1, 2, and 3 with comma separation.");
+            Console.WriteLine(NumberPokeUiConstants.WHICH_CARDS_TO_HOLD);
             return Console.ReadLine();
         }
     }

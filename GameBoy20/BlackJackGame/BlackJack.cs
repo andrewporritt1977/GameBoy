@@ -1,35 +1,46 @@
-﻿using System;
+﻿using GameBoy20.BlackJackGame.Messages;
 using GameBoy20.Cards;
 using GameBoy20.Utils.Interfaces;
 
 namespace GameBoy20.BlackJackGame
 {
-    //Class Setup
-    
-
     // Game Logic
-    class BlackJack : IGame
+    public class BlackJack : IGame
     {
+        public BlackJack(IBlackJackMessages messages, ICardDeck cardDeck)
+        {
+            _messages = messages;
+            _cardDeck = cardDeck;
+        }
+
+        private readonly IBlackJackMessages _messages;
+        private readonly ICardDeck _cardDeck;
+
         public void LaunchGame()
         {   
             //initial step
-            Dealer dealer = new Dealer(new CardDeck());
+            Dealer dealer = new Dealer(_cardDeck);
             dealer.TakeCard();
-            Player player = new Player(new CardDeck());
+            Player player = new Player(_cardDeck);
             player.TakeCard();
             player.TakeCard();
-            
+
             //play
-            Console.WriteLine("Welcome to blackjack");
-            Console.WriteLine("The dealer's cards, excluding hidden card, total " + dealer.HandTotal() + 
-                              " with their hand of: " + dealer.HandContents());
+            _messages.InformWelcome();
+            _messages.InformDealerCardsExcludingHidden(dealer.HandTotal(), dealer.HandContents());
 
             //player turn
             while (!player.Stand)
             {
-                Console.WriteLine("Your hand is " + player.HandTotal() + " with your hand of: " + player.HandContents());
-                Console.WriteLine("Would you like to take a hand? (y/n)");
-                var confirmation = Console.ReadLine();
+                if (player.HandTotal() == 21)
+                {
+                    player.Win = true;
+                    player.Stand = true;
+                    _messages.InformPlayerBlackJack();
+                }
+
+                _messages.InformPlayerCards(player.HandTotal(), player.HandContents());
+                var confirmation = _messages.ObtainTakeHandConfirmation();
                 if (confirmation.Equals("y"))
                 {
                     player.TakeCard();
@@ -37,14 +48,13 @@ namespace GameBoy20.BlackJackGame
                     {
                         player.Win = true;
                         player.Stand = true;
-                        Console.WriteLine("BlackJack! You win!");
+                        _messages.InformPlayerBlackJack();
                     }
                     else if (player.HandTotal() > 21)
                     {
                         player.Win = false;
                         player.Stand = true;
-                        Console.WriteLine("You lose, your hand is : " + player.HandTotal() + 
-                                          " with your hand of: " + player.HandContents());
+                        _messages.InformPlayerBust(player.HandTotal(), player.HandContents());
                     }
                 }
                 else
@@ -57,34 +67,31 @@ namespace GameBoy20.BlackJackGame
             if (!player.Win.HasValue)
             {
                 dealer.RevealHiddenCard();
-                Console.WriteLine("The dealer's hidden card is: " + dealer.HiddenCard + ", making their total at: " +
-                                  dealer.HandTotal() + " with their hand of: " + dealer.HandContents());
+                _messages.InformDealerCardsIncludingHidden(dealer.HiddenCard, dealer.HandTotal(), dealer.HandContents());
                 while (dealer.HandTotal() < 17)
                 {
                     dealer.TakeCard();
-                    Console.WriteLine("The dealer has taken another card to now total: " + dealer.HandTotal() + " with their hand of: " + dealer.HandContents());
+                    _messages.InformDealerTakeCard(dealer.HandTotal(), dealer.HandContents());
                 }
                 if (dealer.HandTotal() > 21)
                 {
                     player.Win = true;
-                    Console.WriteLine("The dealer has gone bust, you win." + " with their hand of: " + dealer.HandContents());
+                    _messages.InformDealerBust(dealer.HandContents());
                 }
                 else if (dealer.HandTotal() == 21)
                 {
                     player.Win = false;
-                    Console.WriteLine("BlackJack for dealer, you lose" + " with their hand of: " + dealer.HandContents());
+                    _messages.InformDealerBlackJack(dealer.HandContents());
                 }
                 else if (dealer.HandTotal() > player.HandTotal())
                 {
                     player.Win = false;
-                    Console.WriteLine("The dealer has a greater hand than you at: " + dealer.HandTotal() +
-                                      ", you lose with your hand of: " + player.HandTotal());
+                    _messages.InformDealerWin(dealer.HandTotal(), player.HandTotal());
                 }
                 else if (player.HandTotal() > dealer.HandTotal())
                 {
                     player.Win = true;
-                    Console.WriteLine("The dealer has a lesser hand than you at: " + dealer.HandTotal() +
-                                      ", you win with your hand of: " + player.HandTotal());
+                    _messages.InformDealerLoss(dealer.HandTotal(), player.HandTotal());
                 }
             }
         }

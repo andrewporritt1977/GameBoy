@@ -8,7 +8,6 @@ namespace GameBoy20.BlackJackGame
         {
             
         }
-        public bool? Win { get; set; }
     }
 
 }

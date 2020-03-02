@@ -16,6 +16,8 @@ namespace GameBoy20.BlackJackGame
 
         public List<string> Hand = new List<string>();
 
+        public bool? NonStandardWin { get; set; }
+
         public bool Stand { get; set; }
         
         public int HandTotal()

@@ -17,7 +17,9 @@ namespace GameBoy20.NumberPokeGame
 
         public void LaunchGame()
         {
-            _numberPoke.PlayGame(new Hand(_cardDeck.TakeHand(3)));
+            string[] cards = _cardDeck.TakeHand(3);
+            Hand hand = new Hand(cards);
+            _numberPoke.PlayGame(hand);
         }
     }
 }

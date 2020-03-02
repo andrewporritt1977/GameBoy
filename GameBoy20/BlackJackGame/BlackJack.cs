@@ -16,25 +16,33 @@ namespace GameBoy20.BlackJackGame
         private readonly IBlackJackMessages _messages;
         private readonly ICardDeck _cardDeck;
 
-        public void LaunchGame()
-        {   
-            //initial step
+        private Dealer SetupDealer()
+        {
             Dealer dealer = new Dealer(_cardDeck);
             dealer.TakeCard();
+            return dealer;
+        }
+
+        private Player SetupPlayer() {
             Player player = new Player(_cardDeck);
             player.TakeCard();
             player.TakeCard();
+            return player;
+        }
 
-            //play
+        private void WelcomePlayer(Dealer dealer)
+        {
             _messages.InformWelcome();
             _messages.InformDealerCardsExcludingHidden(dealer.HandTotal(), dealer.HandContents());
+        }
 
-            //player turn
+        private Player PlayerTurn(Player player)
+        {
             while (!player.Stand)
             {
                 if (player.HandTotal() == 21)
                 {
-                    player.Win = true;
+                    player.NonStandardWin = true;
                     player.Stand = true;
                     _messages.InformPlayerBlackJack();
                 }
@@ -46,13 +54,13 @@ namespace GameBoy20.BlackJackGame
                     player.TakeCard();
                     if (player.HandTotal() == 21)
                     {
-                        player.Win = true;
+                        player.NonStandardWin = true;
                         player.Stand = true;
                         _messages.InformPlayerBlackJack();
                     }
                     else if (player.HandTotal() > 21)
                     {
-                        player.Win = false;
+                        player.NonStandardWin = false;
                         player.Stand = true;
                         _messages.InformPlayerBust(player.HandTotal(), player.HandContents());
                     }
@@ -62,37 +70,65 @@ namespace GameBoy20.BlackJackGame
                     player.Stand = true;
                 }
             }
-            
-            //Dealers turn
-            if (!player.Win.HasValue)
+
+            return player;
+        }
+
+        private Dealer DealerTurn(Dealer dealer)
+        { 
+            dealer.RevealHiddenCard();
+            _messages.InformDealerCardsIncludingHidden(dealer.HiddenCard, dealer.HandTotal(), dealer.HandContents());
+            while (dealer.HandTotal() < 17)
             {
-                dealer.RevealHiddenCard();
-                _messages.InformDealerCardsIncludingHidden(dealer.HiddenCard, dealer.HandTotal(), dealer.HandContents());
-                while (dealer.HandTotal() < 17)
-                {
-                    dealer.TakeCard();
-                    _messages.InformDealerTakeCard(dealer.HandTotal(), dealer.HandContents());
-                }
-                if (dealer.HandTotal() > 21)
-                {
-                    player.Win = true;
-                    _messages.InformDealerBust(dealer.HandContents());
-                }
-                else if (dealer.HandTotal() == 21)
-                {
-                    player.Win = false;
-                    _messages.InformDealerBlackJack(dealer.HandContents());
-                }
-                else if (dealer.HandTotal() > player.HandTotal())
-                {
-                    player.Win = false;
-                    _messages.InformDealerWin(dealer.HandTotal(), player.HandTotal());
-                }
-                else if (player.HandTotal() > dealer.HandTotal())
-                {
-                    player.Win = true;
-                    _messages.InformDealerLoss(dealer.HandTotal(), player.HandTotal());
-                }
+                dealer.TakeCard();
+                _messages.InformDealerTakeCard(dealer.HandTotal(), dealer.HandContents());
+            }
+            if (dealer.HandTotal() > 21)
+            {
+                _messages.InformDealerBust(dealer.HandContents());
+                dealer.NonStandardWin = false;
+            }
+            else if (dealer.HandTotal() == 21)
+            {
+                _messages.InformDealerBlackJack(dealer.HandContents());
+                dealer.NonStandardWin = true;
+            }
+            return dealer;
+        }
+
+        private void FindStandardWin(Player player, Dealer dealer)
+        {
+            //work out wins
+            if (dealer.HandTotal() > player.HandTotal())
+            {
+                _messages.InformDealerWin(dealer.HandTotal(), player.HandTotal());
+            } 
+            else if (player.HandTotal() > dealer.HandTotal()) 
+            {
+                _messages.InformDealerLoss(dealer.HandTotal(), player.HandTotal());
+            } else
+            {
+                //draw
+            }
+
+
+        }
+
+        public void LaunchGame()
+        {
+            Dealer dealer = SetupDealer();
+            Player player = SetupPlayer();
+
+            WelcomePlayer(dealer);
+
+            player = PlayerTurn(player);
+            if (!player.NonStandardWin.HasValue)
+            {
+                dealer = DealerTurn(dealer);
+            }
+            if (!player.NonStandardWin.HasValue || !dealer.NonStandardWin.HasValue)
+            {
+                FindStandardWin(player, dealer);
             }
         }
     }

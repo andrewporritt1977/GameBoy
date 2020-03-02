@@ -5,30 +5,27 @@ namespace GameBoy20.NumberGuessGame
     // Game Logic
     public class NumberGuess
     {
-        private readonly INumberGuessUi _ui;
-        private readonly ICardDeck _cardDeck;
+        private readonly INumberGuessMessages _messages;
 
-        public NumberGuess(INumberGuessUi ui, ICardDeck cardDeck)
+        public NumberGuess(INumberGuessMessages messages)
         {
-            _ui = ui;
-            _cardDeck = cardDeck;
+            _messages = messages;
         }
 
-        public void PlayGame()
+        public void PlayGame(string target)
         {
             // Setup new game
             const int playCount = 5;
-            var target = _cardDeck.TakeCard();
             for (var i = 0; i < playCount; i++)
             {
-                if(target == _ui.ObtainGuess())
+                if(target == _messages.ObtainGuess())
                 {
-                    _ui.ObtainWinConfirmation();
+                    _messages.ObtainWinConfirmation();
                     return;
                 }
-                _ui.NotifyIncorrectGuess();
+                _messages.NotifyIncorrectGuess();
             }
-            _ui.NotifyGameLoss(target);
+            _messages.NotifyGameLoss(target);
         }
     }
 }

@@ -1,6 +1,6 @@
 namespace GameBoy20.NumberGuessGame
 {
-    public interface INumberGuessUi
+    public interface INumberGuessMessages
     {
         public string ObtainGuess();
 

@@ -35,7 +35,7 @@ namespace GameBoy20.BlackJackGame
 
             for (var i = 0; i < aceCount; i++)
             {
-                if ((total + 10) < 21) total = total + 10;
+                if ((total + 10) <= 21) total = total + 10;
             }
             return total;
         }

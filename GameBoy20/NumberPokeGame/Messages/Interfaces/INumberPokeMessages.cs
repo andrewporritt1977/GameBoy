@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GameBoy20.NumberPokeGame
+﻿namespace GameBoy20.NumberPokeGame.Messages.Interfaces
 {
-    public interface INumberPokeUi
+    public interface INumberPokeMessages
     {
         public string ObtainCardsToHold();
         public void InformLose();
         public void InformWin();
         public void InformSuperWin();
         public void InformNewLine();
-        public void InformCards(string[] cards);
+        public void InformCards(Hand hand);
 
     }
 }
